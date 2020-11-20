@@ -12,7 +12,7 @@
         const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
 
         const openSms = function ({ number, body }) {
-          window.open("sms://" + number + "=" + body, "_self");
+          window.open("sms://" + number + "&body=" + body, "_self");
         };
 
         const buildCardQuestionElm = function (question) {
@@ -41,7 +41,6 @@
             policyNumber,
             index
           ) {
-            console.log(policyNumber);
             const option = document.createElement("div");
             option.innerHTML = policyNumber.title;
             option.addEventListener("click", function () {
