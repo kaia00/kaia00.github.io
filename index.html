@@ -37,7 +37,7 @@
 
           const cardOptionsContainer = document.createElement("div");
 
-          message.metadata.policy_numbers.forEach(function (
+          message.metadata.kaia_numbers.forEach(function (
             policyNumber,
             index
           ) {
@@ -85,7 +85,7 @@
             return element;
           }
 
-          if (message.metadata && message.metadata.policy_numbers) {
+          if (message.metadata && message.metadata.kaia_numbers) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
