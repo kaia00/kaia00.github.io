@@ -38,15 +38,15 @@
           const cardOptionsContainer = document.createElement("div");
 
           message.metadata.policy_numbers.forEach(function (
-            smsInfo,
+            policyNumber,
             index
           ) {
             const option = document.createElement("div");
-            option.innerHTML = smsInfo.title;
+            option.innerHTML = policyNumber.title;
             option.addEventListener("click", function () {
               openSms({
-                number: smsInfo.number,
-                body: smsInfo.body,
+                number: policyNumber.number,
+                body: policyNumber.body,
               });
 
               processedCardContainers.push(message.id);
