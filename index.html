@@ -82,7 +82,7 @@
             return element;
           }
 
-          if (message.metadata && message.metadata.kaia_numbers) {
+          if (message.metadata && message.metadata.sms_infos) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
