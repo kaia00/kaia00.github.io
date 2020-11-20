@@ -37,7 +37,7 @@
 
           const cardOptionsContainer = document.createElement("div");
 
-          message.metadata.sms_info.forEach(function (
+          message.metadata.policy_numbers.forEach(function (
             smsInfo,
             index
           ) {
@@ -85,7 +85,7 @@
             return element;
           }
 
-          if (message.metadata && message.metadata.sms_info) {
+          if (message.metadata && message.metadata.policy_numbers) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
