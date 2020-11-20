@@ -37,16 +37,13 @@
 
           const cardOptionsContainer = document.createElement("div");
 
-          message.metadata.kaia_numbers.forEach(function (
-            kaiaNumber,
-            index
-          ) {
+          message.metadata.sms_infos.forEach(function (smsInfo, index) {
             const option = document.createElement("div");
-            option.innerHTML = policyNumber.title;
+            option.innerHTML = smsInfo.title;
             option.addEventListener("click", function () {
               openSms({
-                number: policyNumber.number,
-                body: policyNumber.body,
+                number: smsInfo.number,
+                body: smsInfo.body,
               });
 
               processedCardContainers.push(message.id);
