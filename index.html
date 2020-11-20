@@ -3,8 +3,108 @@
   <head>
     <title>Glia demo</title>
     <script src="https://api.beta.salemove.com/salemove_integration.js"></script>
+
+    <script>
+      sm.getApi({ version: "v1" }).then(function (api) {
+        let processedCardContainers = [];
+        let engagementChat;
+        const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
+
+        const sendSelectedChoice = function ({ selectedText, selectedValue }) {
+          engagementChat.sendMessage(selectedText, {
+            attachment: {
+              type: "single_choice_response",
+              selected_option: selectedValue,
+            },
+          });
+        };
+
+        const buildCardQuestionElm = function (question) {
+          const cardQuestion = document.createElement("div");
+          cardQuestion.classList.add("sm-choice-card-question");
+          cardQuestion.innerHTML = question;
+
+          return cardQuestion;
+        };
+
+        const buildCardImageElement = function (imageUrl) {
+          const cardImage = document.createElement("div");
+          cardImage.classList.add("sm-choice-card-image-container");
+          cardImage.innerHTML = `<img src="${imageUrl}" />`;
+
+          return cardImage;
+        };
+
+        const buildCardOptions = function (message) {
+          const cardOptions = document.createElement("div");
+          cardOptions.classList.add("sm-choice-card-options");
+
+          const cardOptionsContainer = document.createElement("div");
+
+          message.metadata.policy_numbers.forEach(function (
+            policyNumber,
+            index
+          ) {
+            const option = document.createElement("div");
+            option.innerHTML = policyNumber;
+            option.addEventListener("click", function () {
+              sendSelectedChoice({
+                selectedText: policyNumber,
+                selectedValue: `Selected value - ${policyNumber}`,
+              });
+
+              processedCardContainers.push(message.id);
+            });
+            option.setAttribute(
+              "style",
+              `cursor:pointer; background:${colors[index]}; color:white; font-weight:bold;`
+            );
+            cardOptionsContainer.appendChild(option);
+          });
+
+          cardOptions.appendChild(cardOptionsContainer);
+
+          return cardOptions;
+        };
+
+        api.addEventListener(api.EVENTS.ENGAGEMENT_START, (engagement) => {
+          engagementChat = engagement.chat;
+        });
+
+        api.visitorApp.setChatMessageRenderer(function (message) {
+          if (processedCardContainers.includes(message.id)) {
+            const element = document.createElement("div");
+            element.classList.add("custom-policy-number-container");
+            element.classList.add("sm-operator-chat-box");
+
+            const chatTextContainer = document.createElement("div");
+            chatTextContainer.classList.add("sm-chat-text");
+            chatTextContainer.innerHTML = message.content;
+            chatTextContainer.setAttribute(
+              "style",
+              "font-weight:bold; color:red;"
+            );
+
+            element.appendChild(chatTextContainer);
+            return element;
+          }
+
+          if (message.metadata && message.metadata.policy_numbers) {
+            const cardContainer = document.createElement("div");
+            cardContainer.classList.add("sm-choice-card-container");
+            cardContainer.appendChild(buildCardQuestionElm(message.content));
+            cardContainer.appendChild(
+              buildCardImageElement(message.metadata.image_url)
+            );
+            cardContainer.appendChild(buildCardOptions(message));
+
+            return cardContainer;
+          }
+        });
+      });
+    </script>
   </head>
-  <body style="background-color:C9A9E7;">
+  <body style="background-color: C9A9E7">
     <h1>Hello Glia</h1>
     <nav>
       <a href="/setting">Setting</a>
@@ -12,17 +112,16 @@
     </nav>
     <p>Kaia is here.</p>
     <button id="olennupp" type="button">Kliki siin!</button>
-    
+
     <h1>Form to fill out</h1>
-    
-<form>
-  <input type="checkbox" name="vehicle1" value="Bike">
-  <label for="vehicle1"> I have a bike</label><br>
-  <input type="checkbox" name="vehicle2" value="Car">
-  <label for="vehicle2"> I have a car</label><br>
-  <input type="checkbox" name="vehicle3" value="Boat" checked>
-  <label for="vehicle3"> I have a boat</label><br><br>
-</form>
-    
+
+    <form>
+      <input type="checkbox" name="vehicle1" value="Bike" />
+      <label for="vehicle1"> I have a bike</label><br />
+      <input type="checkbox" name="vehicle2" value="Car" />
+      <label for="vehicle2"> I have a car</label><br />
+      <input type="checkbox" name="vehicle3" value="Boat" checked />
+      <label for="vehicle3"> I have a boat</label><br /><br />
+    </form>
   </body>
 </html>
