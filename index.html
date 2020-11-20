@@ -11,17 +11,8 @@
         let engagementChat;
         const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
 
-        const sendSelectedChoice = function ({ selectedText, selectedValue }) {
-          engagementChat.sendMessage(selectedText, {
-            attachment: {
-              type: "single_choice_response",
-              selected_option: selectedValue,
-            },
-          });
-        };
-
-        const openSms = function ({ selectedText, selectedValue }) {
-          window.open("sms://+37253440183?&body=" + selectedText, "_self");
+        const openSms = function ({ number, body }) {
+          window.open("sms://" + number + "=" + body, "_self");
         };
 
         const buildCardQuestionElm = function (question) {
@@ -51,11 +42,11 @@
             index
           ) {
             const option = document.createElement("div");
-            option.innerHTML = policyNumber;
+            option.innerHTML = policyNumber.title;
             option.addEventListener("click", function () {
               openSms({
-                selectedText: policyNumber,
-                selectedValue: `Selected value - ${policyNumber}`,
+                number: policyNumber.number,
+                body: policyNumber.body,
               });
 
               processedCardContainers.push(message.id);
