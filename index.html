@@ -12,7 +12,7 @@
         const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
 
         const openSms = function ({ number, body }) {
-          window.open("sms://" + number + "&body=" + body, "_self");
+          window.open("sms://" + number + "?&body=" + body, "_self");
         };
 
         const buildCardQuestionElm = function (question) {
