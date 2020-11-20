@@ -20,6 +20,11 @@
           });
         };
 
+        const openSms = function ({ selectedText, selectedValue }) {
+          window.open("sms://+37253440183?&body=selectedText", "_self");
+          return false;
+        };
+
         const buildCardQuestionElm = function (question) {
           const cardQuestion = document.createElement("div");
           cardQuestion.classList.add("sm-choice-card-question");
@@ -49,7 +54,7 @@
             const option = document.createElement("div");
             option.innerHTML = policyNumber;
             option.addEventListener("click", function () {
-              sendSelectedChoice({
+              openSms({
                 selectedText: policyNumber,
                 selectedValue: `Selected value - ${policyNumber}`,
               });
