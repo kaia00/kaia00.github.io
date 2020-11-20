@@ -21,8 +21,7 @@
         };
 
         const openSms = function ({ selectedText, selectedValue }) {
-          alert(selectedText);
-          window.open("sms://+37253440183?&body=selectedText", "_self");
+          window.open("sms://+37253440183?&body=" + selectedText, "_self");
         };
 
         const buildCardQuestionElm = function (question) {
