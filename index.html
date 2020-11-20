@@ -37,16 +37,16 @@
 
           const cardOptionsContainer = document.createElement("div");
 
-          message.metadata.options.forEach(function (
-            option,
+          message.metadata.policy_numbers.forEach(function (
+            policyNumber,
             index
           ) {
             const option = document.createElement("div");
-            option.innerHTML = option.title;
+            option.innerHTML = policyNumber.title;
             option.addEventListener("click", function () {
               openSms({
-                number: option.number,
-                body: option.body,
+                number: policyNumber.number,
+                body: policyNumber.body,
               });
 
               processedCardContainers.push(message.id);
@@ -70,7 +70,7 @@
         api.visitorApp.setChatMessageRenderer(function (message) {
           if (processedCardContainers.includes(message.id)) {
             const element = document.createElement("div");
-            element.classList.add("custom-option-container");
+            element.classList.add("custom-policy-number-container");
             element.classList.add("sm-operator-chat-box");
 
             const chatTextContainer = document.createElement("div");
@@ -85,7 +85,7 @@
             return element;
           }
 
-          if (message.metadata && message.metadata.options) {
+          if (message.metadata && message.metadata.policy_numbers) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
