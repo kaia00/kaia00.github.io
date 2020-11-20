@@ -23,14 +23,6 @@
           return cardQuestion;
         };
 
-        const buildCardImageElement = function (imageUrl) {
-          const cardImage = document.createElement("div");
-          cardImage.classList.add("sm-choice-card-image-container");
-          cardImage.innerHTML = `<img src="${imageUrl}" />`;
-
-          return cardImage;
-        };
-
         const buildCardOptions = function (message) {
           const cardOptions = document.createElement("div");
           cardOptions.classList.add("sm-choice-card-options");
@@ -86,9 +78,6 @@
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
-            cardContainer.appendChild(
-              buildCardImageElement(message.metadata.image_url)
-            );
             cardContainer.appendChild(buildCardOptions(message));
 
             return cardContainer;
