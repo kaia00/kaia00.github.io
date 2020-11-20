@@ -37,16 +37,16 @@
 
           const cardOptionsContainer = document.createElement("div");
 
-          message.metadata.policy_numbers.forEach(function (
-            policyNumber,
+          message.metadata.options.forEach(function (
+            option,
             index
           ) {
             const option = document.createElement("div");
-            option.innerHTML = policyNumber.title;
+            option.innerHTML = option.title;
             option.addEventListener("click", function () {
               openSms({
-                number: policyNumber.number,
-                body: policyNumber.body,
+                number: option.number,
+                body: option.body,
               });
 
               processedCardContainers.push(message.id);
@@ -85,7 +85,7 @@
             return element;
           }
 
-          if (message.metadata && message.metadata.policy_numbers) {
+          if (message.metadata && message.metadata.options) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add("sm-choice-card-container");
             cardContainer.appendChild(buildCardQuestionElm(message.content));
