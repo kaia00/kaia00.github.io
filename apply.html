@@ -156,5 +156,44 @@ hr.rounded {
   <p><button>Apply</button></p>
 
 </form>
+   
+   <form class="mySecondForm">
+  <p>
+    <label>Name
+      <input type="text" name="customer_name" required>
+    </label> 
+  </p>
+
+  <p>
+    <label>Surname 
+      <input type="text" name="customer_surname">
+    </label>
+  </p>
+
+  <p>
+    <label>Email 
+      <input type="email" name="email_address">
+    </label>
+  </p>
+  
+   <p>
+    <label>Amount 
+      <input class="sm_cobrowsing_masked_field" type="number" name="insurance_amount">
+    </label>
+  </p>
+  
+   <p>
+    <label>Annual income 
+      <input class="sm_cobrowsing_masked_field" type="number" name="annual_income">
+    </label>
+  </p>
+
+  <fieldset>
+    <legend>Which type of insurance you would like to apply to?</legend>
+    <p><label> <input type="checkbox" name="insurance_type" id="home_insurance" required value="home"> Home </label></p>
+    <p><label> <input type="checkbox" name="insurance_type" id="car_insurance" required value="car"> Car </label></p>
+    <p><label> <input type="checkbox" name="insurance_type" id="life_insurance"required value="life"> Life </label></p>
+  </fieldset>
+   </form>
       </body>
 </html>
