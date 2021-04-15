@@ -4,34 +4,22 @@
     <title>Glia demo</title>
     <script async src="https://api.beta.salemove.com/salemove_integration.js"></script>
     <script>
-
-   sm.getApi({version: 'v1'}).then(function(glia) {
-
-      glia.updateInformation({
-
-"customAttributes":{test: 'head tag'}
-
-      });
-
-   });
-
+sm.getApi({version: 'v1'}).then(function(glia) {
+  glia.updateInformation({
+    "customAttributes":{nimi: "head tag"}
+    });
+});
 </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body style="background-color: C9A9E7">
     
         <script>
-
-   sm.getApi({version: 'v1'}).then(function(glia) {
-
-      glia.updateInformation({
-
-"customAttributes":{test2: 'body tag'}
-
-      });
-
-   });
-
+sm.getApi({version: 'v1'}).then(function(glia) {
+  glia.updateInformation({
+    "customAttributes":{nimi: "body tag"}
+    });
+});
 </script>
     <script>
       sm.getApi({ version: "v1" }).then(function (api) {
