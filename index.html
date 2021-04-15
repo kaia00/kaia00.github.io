@@ -3,6 +3,19 @@
   <head>
     <title>Glia demo</title>
     <script async src="https://api.beta.salemove.com/salemove_integration.js"></script>
+    <script>
+
+   sm.getApi({version: 'v1'}).then(function(glia) {
+
+      glia.updateInformation({
+
+"customAttributes":{"test": "testing attributes"}
+
+      });
+
+   });
+
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body style="background-color: C9A9E7">
