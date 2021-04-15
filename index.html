@@ -1,115 +1,116 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Glia demo</title>
-    <script async src="https://api.beta.salemove.com/salemove_integration.js"></script>
-    <script>
-sm.getApi({version: 'v1'}).then(function(glia) {
-  glia.updateInformation({
-    customAttributes:{nimi: "head tag"}
-    });
-});
-</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body style="background-color: C9A9E7">
-    
-        <script>
-sm.getApi({version: 'v1'}).then(function(glia) {
-  glia.updateInformation({
-    customAttributes:{nimi: "body tag"}
-    });
-});
-</script>
-    <script>
-      sm.getApi({ version: "v1" }).then(function (api) {
-        let processedCardContainers = [];
-        let engagementChat;
-        const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
-
-        const openSms = function ({ number, body }) {
-          window.open("sms://" + number + "?&body=" + body, "_self");
-        };
-
-        const buildCardQuestionElm = function (question) {
-          const cardQuestion = document.createElement("div");
-          cardQuestion.classList.add("sm-choice-card-question");
-          cardQuestion.innerHTML = question;
-
-          return cardQuestion;
-        };
-
-        const buildCardOptions = function (message) {
-          const cardOptions = document.createElement("div");
-          cardOptions.classList.add("sm-choice-card-options");
-
-          const cardOptionsContainer = document.createElement("div");
-
-          message.metadata.sms_infos.forEach(function (smsInfo, index) {
-            const option = document.createElement("div");
-            option.innerHTML = smsInfo.title;
-            option.addEventListener("click", function () {
-              openSms({
-                number: smsInfo.number,
-                body: smsInfo.body,
-              });
-
-              processedCardContainers.push(message.id);
-            });
-            option.setAttribute(
-              "style",
-              `cursor:pointer; background:${colors[index]}; color:white; font-weight:bold;`
-            );
-            cardOptionsContainer.appendChild(option);
-          });
-
-          cardOptions.appendChild(cardOptionsContainer);
-
-          return cardOptions;
-        };
-
-        api.addEventListener(api.EVENTS.ENGAGEMENT_START, (engagement) => {
-          engagementChat = engagement.chat;
-        });
-
-        api.visitorApp.setChatMessageRenderer(function (message) {
-          if (processedCardContainers.includes(message.id)) {
-            const element = document.createElement("div");
-            element.classList.add("custom-sms-info-container");
-            element.classList.add("sm-operator-chat-box");
-
-            const chatTextContainer = document.createElement("div");
-            chatTextContainer.classList.add("sm-chat-text");
-            chatTextContainer.innerHTML = message.content;
-            chatTextContainer.setAttribute(
-              "style",
-              "font-weight:bold; color:red;"
-            );
-
-            element.appendChild(chatTextContainer);
-            return element;
-          }
-
-          if (message.metadata && message.metadata.sms_infos) {
-            const cardContainer = document.createElement("div");
-            cardContainer.classList.add("sm-choice-card-container");
-            cardContainer.appendChild(buildCardQuestionElm(message.content));
-            cardContainer.appendChild(buildCardOptions(message));
-
-            return cardContainer;
-          }
-        });
-      });
-    </script>
-    <h1>K's insurance</h1>
-    <nav>
-      <a href="/setting">Setting</a>
-      <a href="/about">About</a>
-      <a href="/apply">Apply for insurance</a>
-      
-    </nav>
-    <p>Kaia is here.</p>
-    <button id="olennupp" type="button">Kliki siin!</button>
-
-  </body>
+   <head>
+      <title>Glia demo</title>
+      <script async src="https://api.beta.salemove.com/salemove_integration.js"></script>
+      <script>
+         sm.getApi({version: 'v1'}).then(function(glia) {
+           console.log("header get api success")
+           glia.updateInformation({
+             console.log("header updateInformation success")
+             customAttributes:{nimi: "head tag"}
+             });
+         });
+      </script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body style="background-color: C9A9E7">
+      <script>
+         sm.getApi({version: 'v1'}).then(function(glia) {
+           console.log("body get api success")
+           glia.updateInformation({
+             console.log("header updateInformation success")
+             customAttributes:{nimi: "body tag"}
+             });
+         });
+      </script>
+      <script>
+         sm.getApi({ version: "v1" }).then(function (api) {
+           let processedCardContainers = [];
+           let engagementChat;
+           const colors = ["#b6454b", "#0097fb", "#cc6a2f", "#9f55a6"];
+         
+           const openSms = function ({ number, body }) {
+             window.open("sms://" + number + "?&body=" + body, "_self");
+           };
+         
+           const buildCardQuestionElm = function (question) {
+             const cardQuestion = document.createElement("div");
+             cardQuestion.classList.add("sm-choice-card-question");
+             cardQuestion.innerHTML = question;
+         
+             return cardQuestion;
+           };
+         
+           const buildCardOptions = function (message) {
+             const cardOptions = document.createElement("div");
+             cardOptions.classList.add("sm-choice-card-options");
+         
+             const cardOptionsContainer = document.createElement("div");
+         
+             message.metadata.sms_infos.forEach(function (smsInfo, index) {
+               const option = document.createElement("div");
+               option.innerHTML = smsInfo.title;
+               option.addEventListener("click", function () {
+                 openSms({
+                   number: smsInfo.number,
+                   body: smsInfo.body,
+                 });
+         
+                 processedCardContainers.push(message.id);
+               });
+               option.setAttribute(
+                 "style",
+                 `cursor:pointer; background:${colors[index]}; color:white; font-weight:bold;`
+               );
+               cardOptionsContainer.appendChild(option);
+             });
+         
+             cardOptions.appendChild(cardOptionsContainer);
+         
+             return cardOptions;
+           };
+         
+           api.addEventListener(api.EVENTS.ENGAGEMENT_START, (engagement) => {
+             engagementChat = engagement.chat;
+           });
+         
+           api.visitorApp.setChatMessageRenderer(function (message) {
+             if (processedCardContainers.includes(message.id)) {
+               const element = document.createElement("div");
+               element.classList.add("custom-sms-info-container");
+               element.classList.add("sm-operator-chat-box");
+         
+               const chatTextContainer = document.createElement("div");
+               chatTextContainer.classList.add("sm-chat-text");
+               chatTextContainer.innerHTML = message.content;
+               chatTextContainer.setAttribute(
+                 "style",
+                 "font-weight:bold; color:red;"
+               );
+         
+               element.appendChild(chatTextContainer);
+               return element;
+             }
+         
+             if (message.metadata && message.metadata.sms_infos) {
+               const cardContainer = document.createElement("div");
+               cardContainer.classList.add("sm-choice-card-container");
+               cardContainer.appendChild(buildCardQuestionElm(message.content));
+               cardContainer.appendChild(buildCardOptions(message));
+         
+               return cardContainer;
+             }
+           });
+         });
+      </script>
+      <h1>K's insurance</h1>
+      <nav>
+         <a href="/setting">Setting</a>
+         <a href="/about">About</a>
+         <a href="/apply">Apply for insurance</a>
+      </nav>
+      <p>Kaia is here.</p>
+      <button id="olennupp" type="button">Kliki siin!</button>
+   </body>
 </html>
