@@ -18,7 +18,9 @@ var installGlia=function(a){
 installGlia(function(){
    sm.getApi({version: 'v1'}).then(function(glia) {
 glia.updateInformation({
-      customAttributes: {State: "TX"}
+      customAttributes: {State: "TX",
+                        Name: "Mari",
+                        Email: "mari@mari.com"}
     }).then(function() {
         console.log("Visitor Information successfully updated");
     }).catch(function(error) {
