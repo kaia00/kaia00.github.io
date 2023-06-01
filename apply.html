@@ -9,6 +9,7 @@
    window.onload = function () { 
   sm.getApi({version: 'v1'}).then(function(glia) {
     glia.updateInformation({
+        customAttributesUpdateMethod: 'merge',
       "customAttributes": {"State":"TX"},
     });
   });
